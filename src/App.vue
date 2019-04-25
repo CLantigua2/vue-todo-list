@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <Header v-bind:header="header"/>
-    <Todos v-bind:todos="todos" @del-todo="deleteTodo"/>
+    <FilterSearch v-model="search"/>
+    <Todos v-bind:todos="filteredTodos" @del-todo="deleteTodo"/>
   </div>
 </template>
 
 <script>
 import Todos from "./components/Todos";
 import Header from "./components/Header";
+import FilterSearch from "./components/FilterSearch";
 export default {
   name: "app",
   components: {
     Todos,
-    Header
+    Header,
+    FilterSearch
   },
   // state
   data() {
@@ -34,12 +37,30 @@ export default {
           completed: false
         }
       ],
-      header: "Todo App"
+      header: "Todo App",
+      search: ""
     };
   },
   methods: {
     deleteTodo(id) {
       this.todos = this.todos.filter(item => item.id !== id);
+    },
+    inputChange() {
+      this.todos =
+        this.todos.filter(todo =>
+          todo.toUpperCase().indexOf(this.search.toUpperCase())
+        ) > -1;
+    }
+  },
+  computed: {
+    filteredTodos() {
+      return this.todos.filter(todo => {
+        if (todo.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1) {
+          return todo;
+        } else {
+          return null;
+        }
+      });
     }
   }
 };
