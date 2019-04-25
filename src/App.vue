@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Header v-bind:header="header"/>
     <FilterSearch v-model="search"/>
+    <Header v-bind:header="header"/>
+    <AddTodo v-model="newTodo" @add-todo="addTodo"/>
     <Todos v-bind:todos="filteredTodos" @del-todo="deleteTodo"/>
   </div>
 </template>
@@ -10,12 +11,14 @@
 import Todos from "./components/Todos";
 import Header from "./components/Header";
 import FilterSearch from "./components/FilterSearch";
+import AddTodo from "./components/AddTodo";
 export default {
   name: "app",
   components: {
     Todos,
     Header,
-    FilterSearch
+    FilterSearch,
+    AddTodo
   },
   // state
   data() {
@@ -38,18 +41,21 @@ export default {
         }
       ],
       header: "Todo App",
-      search: ""
+      search: "",
+      newTodo: ""
     };
   },
   methods: {
-    deleteTodo(id) {
+    deleteTodo() {
       this.todos = this.todos.filter(item => item.id !== id);
     },
-    inputChange() {
-      this.todos =
-        this.todos.filter(todo =>
-          todo.toUpperCase().indexOf(this.search.toUpperCase())
-        ) > -1;
+    addTodo() {
+      const currentId = this.todos.length;
+      this.todos.push({
+        id: currentId + 1,
+        title: this.newTodo,
+        completed: false
+      });
     }
   },
   computed: {
