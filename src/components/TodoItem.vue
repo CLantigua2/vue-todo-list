@@ -1,11 +1,21 @@
 <template>
-  <div class="todo-item" v-bind:class="{'is-complete': todo.completed}">
+  <div
+    class="todo-item"
+    v-bind:class="{'is-complete': todo.completed}"
+    v-if="todo.editing == false"
+  >
     <p>
-      <input type="checkbox" v-on:change="markComplete">
+      <input type="checkbox" v-on:change="markComplete" :checked="todo.completed">
       {{todo.title}}
-      <button @click="$emit('edit-todo', todo.id, todo.title)" class="edit">Edit</button>
+      <button
+        @click="$emit('edit-todo', todo.id, todo.title, todo.editing)"
+        class="edit"
+      >Edit</button>
       <button @click="$emit('del-todo', todo.id)" class="del">Delete</button>
     </p>
+  </div>
+  <div v-else class="todo-item">
+    <input type="text" value="todo.title">
   </div>
 </template>
 
@@ -51,5 +61,6 @@ export default {
   border-radius: 10px;
   cursor: pointer;
   float: right;
+  outline: none;
 }
 </style>

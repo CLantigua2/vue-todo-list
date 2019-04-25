@@ -38,7 +38,8 @@ input {
 }
 input:focus {
   outline: 0;
-  border-bottom: 1px solid blue;
+  border-bottom: 2px solid blue;
+  margin-bottom: -1px;
 }
 .add {
   background: blue;

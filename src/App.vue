@@ -3,7 +3,7 @@
     <FilterSearch v-model="search"/>
     <Header v-bind:header="header"/>
     <AddTodo v-model="newTodo" @add-todo="addTodo"/>
-    <Todos v-bind:todos="filteredTodos" @del-todo="deleteTodo"/>
+    <Todos v-bind:todos="filteredTodos" @del-todo="deleteTodo" @edit-todo="editTodo"/>
   </div>
 </template>
 
@@ -27,26 +27,33 @@ export default {
         {
           id: 1,
           title: "Todo One",
-          completed: false
+          completed: false,
+          editing: false
         },
         {
           id: 2,
           title: "Todo Two",
-          completed: true
+          completed: true,
+          editing: false
         },
         {
           id: 3,
           title: "Todo Three",
-          completed: false
+          completed: false,
+          editing: false
         }
       ],
       header: "Todo App",
       search: "",
-      newTodo: ""
+      newTodo: "",
+      editedText: ""
     };
   },
   methods: {
-    deleteTodo() {
+    editTodo(id, title, editing) {
+      console.log(id);
+    },
+    deleteTodo(id) {
       this.todos = this.todos.filter(item => item.id !== id);
     },
     addTodo() {
@@ -54,9 +61,10 @@ export default {
       this.todos.push({
         id: currentId + 1,
         title: this.newTodo,
-        completed: false
+        completed: false,
+        editing: false
       });
-      return (this.newTodo = "");
+      this.newTodo = "";
     }
   },
   computed: {
