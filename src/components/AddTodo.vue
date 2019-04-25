@@ -25,11 +25,20 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  margin: 20px 0;
 }
 input {
   padding: 10px;
   width: 90%;
   border: 1px solid lightblue;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  transition: 0.3s ease-in-out;
+}
+input:focus {
+  outline: 0;
+  border-bottom: 1px solid blue;
 }
 .add {
   background: blue;

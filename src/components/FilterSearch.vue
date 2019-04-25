@@ -19,11 +19,19 @@ export default {
 <style scoped>
 .search {
   width: 100%;
+  margin: 20px;
 }
 .search .searchInput {
-  width: 100%;
-  height: 25px;
-  border: 1px solid lightblue;
   padding: 10px;
+  width: 90%;
+  border: 1px solid lightblue;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  transition: 0.3s ease-in-out;
+}
+.searchInput:focus {
+  outline: 0;
+  border-bottom: 1px solid blue;
 }
 </style>
