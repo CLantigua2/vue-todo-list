@@ -56,6 +56,7 @@ export default {
         title: this.newTodo,
         completed: false
       });
+      return (this.newTodo = "");
     }
   },
   computed: {

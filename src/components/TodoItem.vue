@@ -3,7 +3,8 @@
     <p>
       <input type="checkbox" v-on:change="markComplete">
       {{todo.title}}
-      <button @click="$emit('del-todo', todo.id)" class="del">X</button>
+      <button @click="$emit('edit-todo', todo.id, todo.title)" class="edit">Edit</button>
+      <button @click="$emit('del-todo', todo.id)" class="del">Delete</button>
     </p>
   </div>
 </template>
@@ -36,7 +37,18 @@ export default {
   color: #fff;
   border: none;
   padding: 5px 9px;
-  border-radius: 50%;
+  border-radius: 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  float: right;
+}
+.edit {
+  background: green;
+  color: #fff;
+  border: none;
+  padding: 5px 9px;
+  margin: 0 5px;
+  border-radius: 10px;
   cursor: pointer;
   float: right;
 }
